@@ -20,7 +20,21 @@ class ProdutosController extends Controller
     }
 
     public function store (Request $request) {
-        header('Access-Control-Allow-Origin: http://localhost:3000');
-        return $request->all();
+        DB::table('produtos')->insert(
+            [
+                'nome' =>  $request->input('nome'),
+            ]
+        );
+
+        return [
+            "produtos" => $this->produtos->select('id', 'nome')->get(),
+        ];
+    }
+
+    public function users ($id) {
+
+           return [
+               "id" =>  $this->produtos->select('*')->where('id', $id)->get(),
+           ];
     }
 }

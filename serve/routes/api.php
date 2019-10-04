@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-header('Access-Control-Allow-Origin: http://localhost:3000');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -21,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('produtos','ProdutosController@index');
 
 Route::post('store', 'ProdutosController@store');
+
+Route::get('users/{id}','ProdutosController@users');
