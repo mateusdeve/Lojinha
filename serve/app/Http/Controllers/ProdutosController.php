@@ -15,19 +15,21 @@ class ProdutosController extends Controller
     }
     public function index () {
         return [
-            "produtos" => $this->produtos->select('id', 'nome')->get(),
+            "produtos" => $this->produtos->select('id', 'nome', 'email', 'telefone')->get(),
         ];
     }
 
     public function store (Request $request) {
         DB::table('produtos')->insert(
             [
-                'nome' =>  $request->input('nome'),
+                'nome'      =>  $request->input('nome'),
+                'email'     =>  $request->input('email'),
+                'telefone'  =>  $request->input('telefone'),
             ]
         );
 
         return [
-            "produtos" => $this->produtos->select('id', 'nome')->get(),
+            "produtos" => $this->produtos->select('id', 'nome', 'email', 'telefone')->get(),
         ];
     }
 

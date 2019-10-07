@@ -1,12 +1,11 @@
 <template>
     <div class="z-index">
-        
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
                 <v-card-text>
                     <h1 class="text-center pt-5">Make your registration</h1>
                     <v-text-field v-model="form.nome" label="Name"></v-text-field>
-                    <v-text-field v-model="form.phone" label="Phone"></v-text-field>
+                    <v-text-field v-model="form.telefone" label="Phone"></v-text-field>
                     <v-text-field v-model="form.email" label="Email"></v-text-field>
                 </v-card-text>
                 <v-card-actions>
@@ -38,13 +37,18 @@
                       height="350"
                       max-width="350"
                     >
-                      <v-card-text class="my-4 text-center title">ID: {{ produto.id }} <br> Nome: {{ produto.nome }}</v-card-text>
-                      <v-layout fill-height column justify-center align-center>
+                      <v-card-text class="my-4  title">
+                        <p class="font-p">Pedido: {{ produto.id }}</p>
+                        <p class="font-p">Nome: {{ produto.nome }}</p>
+                        <p class="font-p">Email: {{ produto.email }}</p>
+                        <p class="font-p">Telefone: {{ produto.telefone }}</p>
+                      </v-card-text>
+                      <v-layout column justify-center align-center>
                         <v-btn
                             style="margin:0"
                             color="deep-purple accent-4"
                           >
-                          <nuxt-link style="text-decoration: none;" class="text-white" :to="{path: `produtos/carrinho?id=${produto.id}`, params: { id:produto.id } }">Ver detalhes</nuxt-link>
+                          <nuxt-link style="text-decoration: none;" class="text-white" :to="{path: '/produtos/carrinho' ,query: {id: produto.id} }">Ver detalhes</nuxt-link>
                           </v-btn>
                       </v-layout>
                     </v-card>
@@ -68,9 +72,9 @@ export default {
       produtos: [],
       dialog: false,
       form: {
-        nome: "",
-        phone: "",
-        email: ""
+        nome:     "",
+        telefone: "",
+        email:    "",
       },
     }
   },
@@ -121,13 +125,13 @@ export default {
         margin-left: 20px;
         margin-top: 20px;
     }
-    .h-100 {
-      height: 60%;
-    }
     .text-white {
       color: #ffffff;
     }
     .text-center {
       text-align: center;
+    }
+    .font-p {
+      font-size: 18px;
     }
 </style>

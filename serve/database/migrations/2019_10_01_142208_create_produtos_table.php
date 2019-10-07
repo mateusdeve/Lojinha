@@ -16,7 +16,10 @@ class CreateProdutosTable extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome', 30);
-            $table->timestamps();
+            $table->string('email', 50);
+            $table->string('telefone');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

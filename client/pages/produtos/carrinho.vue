@@ -66,13 +66,14 @@ import Menu from '@/components/Menu'
 export default {
     data() {
         return {
-            getId: {
-                nId: "",
-            },
+
         }
     },
     components: {
         Menu,
+    },
+    mounted() {
+        console.log(this.$route.query.id);
     },
     methods: {
         getProdutos(){
@@ -81,18 +82,6 @@ export default {
                 .then(res => {
                     this.produtos = res.data.produtos;
                 })
-        },
-        getId() {
-            var query   =   location.search.slice(1);
-            var partes  =   query.split('&');
-            var data    =   {};
-            partes.forEach(partes   =>  {
-                var chaveValor  =   parte.split('=');
-                var chaveValor  =   chaveValor[0];
-                var valor       =   chaveValor[1];
-                data[chave]     =   valor;
-            });
-            console.log(data);
         },
 
     },
