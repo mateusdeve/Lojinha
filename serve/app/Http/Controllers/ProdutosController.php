@@ -15,28 +15,29 @@ class ProdutosController extends Controller
     }
     public function index () {
         return [
-            "produtos" => $this->produtos->select('id', 'nome', 'email', 'telefone')->get(),
+            "produtos" => $this->produtos->select('id', 'nome', 'sobre', 'situacao','valor')->get(),
         ];
     }
 
     public function store (Request $request) {
         DB::table('produtos')->insert(
             [
-                'nome'      =>  $request->input('nome'),
-                'email'     =>  $request->input('email'),
-                'telefone'  =>  $request->input('telefone'),
+                'nome'          =>  $request->input('nome'),
+                'valor'         =>  $request->input('valor'),
+                'sobre'         =>  $request->input('sobre'),
+                'situacao'      =>  $request->input('situacao'),
             ]
         );
 
         return [
-            "produtos" => $this->produtos->select('id', 'nome', 'email', 'telefone')->get(),
+            "produtos" => $this->produtos->select('id', 'nome', 'sobre', 'situacao','valor')->get(),
         ];
     }
 
     public function users ($id) {
 
            return [
-               "id" =>  $this->produtos->select('*')->where('id', $id)->get(),
+               "produtos" =>  $this->produtos->select('*')->where('id', $id)->get(),
            ];
     }
 }

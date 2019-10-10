@@ -3,10 +3,11 @@
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
                 <v-card-text>
-                    <h1 class="text-center pt-5">Make your registration</h1>
-                    <v-text-field v-model="form.nome" label="Name"></v-text-field>
-                    <v-text-field v-model="form.telefone" label="Phone"></v-text-field>
-                    <v-text-field v-model="form.email" label="Email"></v-text-field>
+                    <h1 class="text-center pt-5 color mb-10">Registrar novo produto</h1>
+                    <v-text-field v-model="form.nome" label="Nome do produto"></v-text-field>
+                    <v-text-field v-model="form.valor" label="Valor"></v-text-field>
+                    <v-text-field v-model="form.sobre" label="Sobre o produto"></v-text-field>
+                    <v-switch v-model="form.situacao" :label="`Situação do produto: ${form.situacao}`"></v-switch>
                 </v-card-text>
                 <v-card-actions>
                     <div class="flex-grow-1"></div>
@@ -40,8 +41,8 @@
                       <v-card-text class="my-4  title">
                         <p class="font-p">Pedido: {{ produto.id }}</p>
                         <p class="font-p">Nome: {{ produto.nome }}</p>
-                        <p class="font-p">Email: {{ produto.email }}</p>
-                        <p class="font-p">Telefone: {{ produto.telefone }}</p>
+                        <p class="font-p">Valor: {{ produto.valor }}</p>
+                        <p class="font-p">Sobre: {{ produto.sobre }}</p>
                       </v-card-text>
                       <v-layout column justify-center align-center>
                         <v-btn
@@ -73,8 +74,9 @@ export default {
       dialog: false,
       form: {
         nome:     "",
-        telefone: "",
-        email:    "",
+        valor:    "",
+        sobre:    "",
+        situacao: 0,
       },
     }
   },
@@ -98,6 +100,7 @@ export default {
         .get('http://localhost:8000/api/produtos')
         .then(res => {
           this.produtos = res.data.produtos;
+          console.log(res.data.produtos);
         })
         .catch(res => console.log(res))
     },
@@ -133,5 +136,8 @@ export default {
     }
     .font-p {
       font-size: 18px;
+    }
+    .color{
+      color: black !important;
     }
 </style>

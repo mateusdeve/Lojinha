@@ -28,29 +28,36 @@
                 <v-col
                 cols="5"
                 >
-                    <h1>Nome do produto</h1>
-                    <h3 style="margin-top: 30px">Em estoque</h3>
-                    <h3 style="margin-top: 30px">Valor: <span style="color: #525252"> R$ 9.999,00</span></h3>
-                    <h3 style="margin-top: 30px">Sobre</h3>
-                    <v-row style="margin-top: 80px">
+                    <h1>{{ produto.nome}}</h1>
+                    <h3 v-if="produto.situacao" style="margin-top: 30px">Em estoque</h3>
+                    <h3 v-else style="margin-top: 30px">Em falta</h3>
+                    <h3 style="margin-top: 30px">Valor: R$ {{ produto.valor }} </h3>
+                    <h3 style="margin-top: 30px">Descrição : {{ produto.sobre }}</h3>
+                    <v-row >
                         <v-col
                         cols="9"
-                        style="margin-top: 40px;"
+                        style="margin-top: 30px"
                         >
-                            <v-btn
-                            color="cyan accent-2"
+                            <v-btn 
+                            text 
+                            icon 
+                            color="cyan"
+                            @click="menos">
+                                <img style="width:35px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjUxMiIgY2xhc3M9IiI+PGc+PHBhdGggZD0ibTI1NiA1MTJjLTE0MS4xNjQwNjIgMC0yNTYtMTE0LjgzNTkzOC0yNTYtMjU2czExNC44MzU5MzgtMjU2IDI1Ni0yNTYgMjU2IDExNC44MzU5MzggMjU2IDI1Ni0xMTQuODM1OTM4IDI1Ni0yNTYgMjU2em0wLTQ4MGMtMTIzLjUxOTUzMSAwLTIyNCAxMDAuNDgwNDY5LTIyNCAyMjRzMTAwLjQ4MDQ2OSAyMjQgMjI0IDIyNCAyMjQtMTAwLjQ4MDQ2OSAyMjQtMjI0LTEwMC40ODA0NjktMjI0LTIyNC0yMjR6bTAgMCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgY2xhc3M9ImFjdGl2ZS1wYXRoIiBzdHlsZT0iZmlsbDojMDBGRkY4IiBkYXRhLW9sZF9jb2xvcj0iIzAwMDAwMCI+PC9wYXRoPjxwYXRoIGQ9Im0zNjggMjcyaC0yMjRjLTguODMyMDMxIDAtMTYtNy4xNjc5NjktMTYtMTZzNy4xNjc5NjktMTYgMTYtMTZoMjI0YzguODMyMDMxIDAgMTYgNy4xNjc5NjkgMTYgMTZzLTcuMTY3OTY5IDE2LTE2IDE2em0wIDAiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6IzAwRkZGOCIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD48L2c+IDwvc3ZnPg==" />
+                            </v-btn>
+                            &nbsp; {{ produto.quantidade }} &nbsp;
+                            <v-btn 
+                            text
+                            icon
+                            color="cyan"
+                            v-on:click="mais"
                             >
-                                Adicionar ao carrinho
+                                <img style="width:35px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDQwMCA0MDAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQwMCA0MDA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj48Zz48Zz4KCTxnPgoJCTxwYXRoIGQ9Ik0xOTkuOTk1LDBDODkuNzE2LDAsMCw4OS43MiwwLDIwMGMwLDExMC4yNzksODkuNzE2LDIwMCwxOTkuOTk1LDIwMEMzMTAuMjc3LDQwMCw0MDAsMzEwLjI3OSw0MDAsMjAwICAgIEM0MDAsODkuNzIsMzEwLjI3NywwLDE5OS45OTUsMHogTTE5OS45OTUsMzczLjc3QzEwNC4xODIsMzczLjc3LDI2LjIzLDI5NS44MTYsMjYuMjMsMjAwYzAtOTUuODE3LDc3Ljk1MS0xNzMuNzcsMTczLjc2NS0xNzMuNzcgICAgYzk1LjgxNywwLDE3My43NzIsNzcuOTUzLDE3My43NzIsMTczLjc3QzM3My43NjksMjk1LjgxNiwyOTUuODEyLDM3My43NywxOTkuOTk1LDM3My43N3oiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6IzAwRkZGOCIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD4KCQk8cGF0aCBkPSJNMjc5LjQ3OCwxODYuODg0aC02Ni4zNjNWMTIwLjUyYzAtNy4yNDMtNS44NzItMTMuMTE1LTEzLjExNS0xMy4xMTVzLTEzLjExNSw1Ljg3My0xMy4xMTUsMTMuMTE1djY2LjM2OGgtNjYuMzYxICAgIGMtNy4yNDIsMC0xMy4xMTUsNS44NzMtMTMuMTE1LDEzLjExNWMwLDcuMjQzLDUuODczLDEzLjExNSwxMy4xMTUsMTMuMTE1aDY2LjM1OHY2Ni4zNjJjMCw3LjI0Miw1Ljg3MiwxMy4xMTQsMTMuMTE1LDEzLjExNCAgICBjNy4yNDIsMCwxMy4xMTUtNS44NzIsMTMuMTE1LTEzLjExNHYtNjYuMzY1aDY2LjM2N2M3LjI0MSwwLDEzLjExNC01Ljg3MywxMy4xMTQtMTMuMTE1ICAgIEMyOTIuNTkzLDE5Mi43NTcsMjg2LjcyLDE4Ni44ODQsMjc5LjQ3OCwxODYuODg0eiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgY2xhc3M9ImFjdGl2ZS1wYXRoIiBzdHlsZT0iZmlsbDojMDBGRkY4IiBkYXRhLW9sZF9jb2xvcj0iIzAwMDAwMCI+PC9wYXRoPgoJPC9nPgo8L2c+PC9nPiA8L3N2Zz4=" />
                             </v-btn>
                         </v-col>
-                        <v-col
-                        cols="3">
-                        <div style="border: solid 1px; padding: 10px">
-                            <h1>
-                                <img style="width: 40px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMS45OTkgNTExLjk5OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTExLjk5OSA1MTEuOTk5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiPjxnPjxnPgoJPGc+CgkJPHBhdGggZD0iTTIxNC42ODUsNDAyLjgyOGMtMjQuODI5LDAtNDUuMDI5LDIwLjItNDUuMDI5LDQ1LjAyOWMwLDI0LjgyOSwyMC4yLDQ1LjAyOSw0NS4wMjksNDUuMDI5czQ1LjAyOS0yMC4yLDQ1LjAyOS00NS4wMjkgICAgQzI1OS43MTMsNDIzLjAyOCwyMzkuNTEzLDQwMi44MjgsMjE0LjY4NSw0MDIuODI4eiBNMjE0LjY4NSw0NjcuNzQyYy0xMC45NjYsMC0xOS44ODctOC45MjItMTkuODg3LTE5Ljg4NyAgICBjMC0xMC45NjYsOC45MjItMTkuODg3LDE5Ljg4Ny0xOS44ODdzMTkuODg3LDguOTIyLDE5Ljg4NywxOS44ODdDMjM0LjU3Miw0NTguODIyLDIyNS42NSw0NjcuNzQyLDIxNC42ODUsNDY3Ljc0MnoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6Izg2MDBFQyIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD4KCTwvZz4KPC9nPjxnPgoJPGc+CgkJPHBhdGggZD0iTTM3Mi42Myw0MDIuODI4Yy0yNC44MjksMC00NS4wMjksMjAuMi00NS4wMjksNDUuMDI5YzAsMjQuODI5LDIwLjIsNDUuMDI5LDQ1LjAyOSw0NS4wMjlzNDUuMDI5LTIwLjIsNDUuMDI5LTQ1LjAyOSAgICBDNDE3LjY1OCw0MjMuMDI4LDM5Ny40NTgsNDAyLjgyOCwzNzIuNjMsNDAyLjgyOHogTTM3Mi42Myw0NjcuNzQyYy0xMC45NjYsMC0xOS44ODctOC45MjItMTkuODg3LTE5Ljg4NyAgICBjMC0xMC45NjYsOC45MjItMTkuODg3LDE5Ljg4Ny0xOS44ODdjMTAuOTY2LDAsMTkuODg3LDguOTIyLDE5Ljg4NywxOS44ODdDMzkyLjUxNyw0NTguODIyLDM4My41OTUsNDY3Ljc0MiwzNzIuNjMsNDY3Ljc0MnoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6Izg2MDBFQyIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD4KCTwvZz4KPC9nPjxnPgoJPGc+CgkJPHBhdGggZD0iTTM4My43MTYsMTY1Ljc1NUgyMDMuNTY3Yy02Ljk0MywwLTEyLjU3MSw1LjYyOC0xMi41NzEsMTIuNTcxYzAsNi45NDMsNS42MjksMTIuNTcxLDEyLjU3MSwxMi41NzFoMTgwLjE0OSAgICBjNi45NDMsMCwxMi41NzEtNS42MjgsMTIuNTcxLTEyLjU3MUMzOTYuMjg3LDE3MS4zODIsMzkwLjY1OSwxNjUuNzU1LDM4My43MTYsMTY1Ljc1NXoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6Izg2MDBFQyIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD4KCTwvZz4KPC9nPjxnPgoJPGc+CgkJPHBhdGggZD0iTTM3My45MTEsMjMxLjAzNUgyMTMuMzczYy02Ljk0MywwLTEyLjU3MSw1LjYyOC0xMi41NzEsMTIuNTcxczUuNjI4LDEyLjU3MSwxMi41NzEsMTIuNTcxaDE2MC41MzcgICAgYzYuOTQzLDAsMTIuNTcxLTUuNjI4LDEyLjU3MS0xMi41NzFDMzg2LjQ4MSwyMzYuNjY0LDM4MC44NTMsMjMxLjAzNSwzNzMuOTExLDIzMS4wMzV6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIHN0eWxlPSJmaWxsOiM4NjAwRUMiIGRhdGEtb2xkX2NvbG9yPSIjMDAwMDAwIj48L3BhdGg+Cgk8L2c+CjwvZz48Zz4KCTxnPgoJCTxwYXRoIGQ9Ik01MDYuMzQxLDEwOS43NDRjLTQuNzk0LTUuODg0LTExLjg5OC05LjI1OC0xOS40ODktOS4yNThIOTUuMjc4TDg3LjM3LDYyLjA5N2MtMS42NTEtOC4wMDgtNy4xMTMtMTQuNzMyLTE0LjYxNC0xNy45ODkgICAgbC01NS4xNzctMjMuOTVjLTYuMzctMi43NjctMTMuNzczLDAuMTU2LTE2LjUzNiw2LjUyNGMtMi43NjYsNi4zNywwLjE1NywxMy43NzQsNi41MjQsMTYuNTM3TDYyLjc0NSw2Ny4xN2w2MC44MjYsMjk1LjI2MSAgICBjMi4zOTYsMTEuNjI4LDEyLjc1MiwyMC4wNjgsMjQuNjI1LDIwLjA2OGgzMDEuMTY2YzYuOTQzLDAsMTIuNTcxLTUuNjI4LDEyLjU3MS0xMi41NzFjMC02Ljk0My01LjYyOC0xMi41NzEtMTIuNTcxLTEyLjU3MSAgICBIMTQ4LjE5N2wtNy4zOTktMzUuOTE2SDQ1MS42OWMxMS44NzIsMCwyMi4yMjktOC40NCwyNC42MjQtMjAuMDY4bDM1LjE2My0xNzAuNjc1ICAgIEM1MTMuMDA4LDEyMy4yNjYsNTExLjEzNiwxMTUuNjI3LDUwNi4zNDEsMTA5Ljc0NHogTTQ1MS42OSwyOTYuMzAxSDEzNS42MTlsLTM1LjE2MS0xNzAuNjc0bDM4Ni4zOTMsMC4wMDFMNDUxLjY5LDI5Ni4zMDF6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIHN0eWxlPSJmaWxsOiM4NjAwRUMiIGRhdGEtb2xkX2NvbG9yPSIjMDAwMDAwIj48L3BhdGg+Cgk8L2c+CjwvZz48L2c+IDwvc3ZnPg==" />
-                                <span> 0</span>
-                            </h1>
-                        </div>
+                        <v-col cols="9">
+                             <h2 v-if="produto.total==0">Total R$ {{ produto.valor }}</h2>
+                            <h2 v-else>Total R$ {{ produto.total }}</h2>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -62,28 +69,76 @@
 <script>
 
 import Menu from '@/components/Menu'
+import axios from 'axios'
 
 export default {
     data() {
         return {
-
+            produto: {},
         }
     },
     components: {
         Menu,
     },
     mounted() {
-        console.log(this.$route.query.id);
+        this.getProdutos();
     },
     methods: {
         getProdutos(){
+
+            if( !this.produtosIsEmpty ) {
+                this.produto = {};
+                return;
+            }
+            
             axios
-                .get('http://localhost:8000/api/produtos')
+                .get(`http://localhost:8000/api/users/${this.$route.query.id}`)
                 .then(res => {
-                    this.produtos = res.data.produtos;
+                    console.log(res.data.produtos);
+                    this.produto = res.data.produtos[0];
+                })
+                .catch(err => {
+                    console.log(err);
                 })
         },
+        
+        mais: function cal(e){
+            while (this.produto.quantidade < 100) {
+                if(this.produto.quantidade  ==  0){
+                    ++this.produto.quantidade;
+                    break;
+                }
+                else{
+                    ++this.produto.quantidade;
+                    break;
+                }
+            }
+            this.produto.total  =  this.produto.quantidade* this.produto.valor;
 
+
+        },
+
+        menos: function cal(){
+            if(this.produto.quantidade  >  1){ 
+                while (this.produto.quantidade < 100) {
+                    if(this.produto.quantidade  ==  0){
+                        --this.produto.quantidade;
+                        break;
+                    }
+                    else{
+                        --this.produto.quantidade;
+                        break;
+                    }
+                }
+            }
+            this.produto.total  =  this.produto.quantidade*this.produto.valor;
+        }
+
+    },
+    computed: {
+        produtosIsEmpty() {
+            return !!this.produto;
+        }
     },
 }
 
