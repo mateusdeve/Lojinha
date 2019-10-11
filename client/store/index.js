@@ -1,11 +1,11 @@
 export const state = () => ({
-    products: {},
+    quantidade: 0,
     counter: 0
   })
   
   export const mutations = {
-    increment (state, id) {
-        console.log(id);
-        state.products  = { ...state.products}   
+    increment (state, qtd) {
+        console.log(qtd);
+        state.quantidade  = qtd;   
     }
   }

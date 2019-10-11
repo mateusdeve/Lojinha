@@ -29,7 +29,6 @@
                 cols="5"
                 >
                     <h1>{{ produto.nome}}</h1>
-                    <v-btn @click="vuex()">Clique aqui</v-btn>
                     <h3 v-if="produto.situacao" style="margin-top: 30px">Em estoque</h3>
                     <h3 v-else style="margin-top: 30px">Em falta</h3>
                     <h3 style="margin-top: 30px">Valor: R$ {{ produto.valor }} </h3>
@@ -116,6 +115,7 @@ export default {
                 }
             }
             this.produto.total  =  this.produto.quantidade* this.produto.valor;
+            this.$store.commit("increment",this.produto.quantidade)
 
 
         },
@@ -134,10 +134,7 @@ export default {
                 }
             }
             this.produto.total  =  this.produto.quantidade*this.produto.valor;
-        },
-
-        vuex() {
-            this.$store.commit("increment",this.produto.id)
+            this.$store.commit("increment",this.produto.quantidade)
         },
 
     },
