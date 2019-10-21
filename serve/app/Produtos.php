@@ -14,6 +14,5 @@ class Produtos extends Model
         'sobre',
         'situacao',
         'quantidade',
-        'total',
     ];
 }

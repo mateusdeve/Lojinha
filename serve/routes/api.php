@@ -22,3 +22,10 @@ Route::get('produtos','ProdutosController@index');
 Route::post('store', 'ProdutosController@store');
 
 Route::get('users/{id}','ProdutosController@users');
+
+Route::post('login', 'Auth\LoginController@login');
+
+Route::post('register', 'Auth\LoginController@register');
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('details', 'Auth\LoginController@details');
+});

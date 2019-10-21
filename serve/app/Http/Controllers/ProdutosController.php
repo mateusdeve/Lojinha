@@ -26,6 +26,7 @@ class ProdutosController extends Controller
                 'valor'         =>  $request->input('valor'),
                 'sobre'         =>  $request->input('sobre'),
                 'situacao'      =>  $request->input('situacao'),
+                'quantidade'    =>  0,
             ]
         );
 

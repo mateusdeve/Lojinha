@@ -1,43 +1,110 @@
 <template>
     <div>
-        <v-app-bar color="deep-purple accent-4" >
-            <v-app-bar-nav-icon>
+        <v-app-bar color="deep-purple accent-4"
+        dark>
+            <v-app-bar-nav-icon
+            @click.stop="drawer = !drawer"
+            >
                 
             </v-app-bar-nav-icon>
+            
 
-            <v-toolbar-title><img style="width:200px;" class="mt-2" src="../assets/logo.png" alt=""></v-toolbar-title>
+            <v-toolbar-title><img style="width:180px;" class="mt-2" src="../assets/logo.png" alt=""></v-toolbar-title>
             <div class="flex-grow-1"></div>
-            <btn icon>
+            <v-btn icon>
 
-            </btn>
-            <btn icon
-            class="badge mt-2"
+            </v-btn>
+            <v-btn icon
+            class="badge mt-2 mr-4"
             >
                 <v-badge 
                 color="cyan">
                     <template v-slot:badge>{{ qtd }}</template>
                     <img style="width: 35px" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMS45OTkgNTExLjk5OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTExLjk5OSA1MTEuOTk5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIGNsYXNzPSIiPjxnPjxnPgoJPGc+CgkJPHBhdGggZD0iTTIxNC42ODUsNDAyLjgyOGMtMjQuODI5LDAtNDUuMDI5LDIwLjItNDUuMDI5LDQ1LjAyOWMwLDI0LjgyOSwyMC4yLDQ1LjAyOSw0NS4wMjksNDUuMDI5czQ1LjAyOS0yMC4yLDQ1LjAyOS00NS4wMjkgICAgQzI1OS43MTMsNDIzLjAyOCwyMzkuNTEzLDQwMi44MjgsMjE0LjY4NSw0MDIuODI4eiBNMjE0LjY4NSw0NjcuNzQyYy0xMC45NjYsMC0xOS44ODctOC45MjItMTkuODg3LTE5Ljg4NyAgICBjMC0xMC45NjYsOC45MjItMTkuODg3LDE5Ljg4Ny0xOS44ODdzMTkuODg3LDguOTIyLDE5Ljg4NywxOS44ODdDMjM0LjU3Miw0NTguODIyLDIyNS42NSw0NjcuNzQyLDIxNC42ODUsNDY3Ljc0MnoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6I0ZGRkZGRiIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD4KCTwvZz4KPC9nPjxnPgoJPGc+CgkJPHBhdGggZD0iTTM3Mi42Myw0MDIuODI4Yy0yNC44MjksMC00NS4wMjksMjAuMi00NS4wMjksNDUuMDI5YzAsMjQuODI5LDIwLjIsNDUuMDI5LDQ1LjAyOSw0NS4wMjlzNDUuMDI5LTIwLjIsNDUuMDI5LTQ1LjAyOSAgICBDNDE3LjY1OCw0MjMuMDI4LDM5Ny40NTgsNDAyLjgyOCwzNzIuNjMsNDAyLjgyOHogTTM3Mi42Myw0NjcuNzQyYy0xMC45NjYsMC0xOS44ODctOC45MjItMTkuODg3LTE5Ljg4NyAgICBjMC0xMC45NjYsOC45MjItMTkuODg3LDE5Ljg4Ny0xOS44ODdjMTAuOTY2LDAsMTkuODg3LDguOTIyLDE5Ljg4NywxOS44ODdDMzkyLjUxNyw0NTguODIyLDM4My41OTUsNDY3Ljc0MiwzNzIuNjMsNDY3Ljc0MnoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6I0ZGRkZGRiIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD4KCTwvZz4KPC9nPjxnPgoJPGc+CgkJPHBhdGggZD0iTTM4My43MTYsMTY1Ljc1NUgyMDMuNTY3Yy02Ljk0MywwLTEyLjU3MSw1LjYyOC0xMi41NzEsMTIuNTcxYzAsNi45NDMsNS42MjksMTIuNTcxLDEyLjU3MSwxMi41NzFoMTgwLjE0OSAgICBjNi45NDMsMCwxMi41NzEtNS42MjgsMTIuNTcxLTEyLjU3MUMzOTYuMjg3LDE3MS4zODIsMzkwLjY1OSwxNjUuNzU1LDM4My43MTYsMTY1Ljc1NXoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6I0ZGRkZGRiIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD4KCTwvZz4KPC9nPjxnPgoJPGc+CgkJPHBhdGggZD0iTTM3My45MTEsMjMxLjAzNUgyMTMuMzczYy02Ljk0MywwLTEyLjU3MSw1LjYyOC0xMi41NzEsMTIuNTcxczUuNjI4LDEyLjU3MSwxMi41NzEsMTIuNTcxaDE2MC41MzcgICAgYzYuOTQzLDAsMTIuNTcxLTUuNjI4LDEyLjU3MS0xMi41NzFDMzg2LjQ4MSwyMzYuNjY0LDM4MC44NTMsMjMxLjAzNSwzNzMuOTExLDIzMS4wMzV6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIHN0eWxlPSJmaWxsOiNGRkZGRkYiIGRhdGEtb2xkX2NvbG9yPSIjMDAwMDAwIj48L3BhdGg+Cgk8L2c+CjwvZz48Zz4KCTxnPgoJCTxwYXRoIGQ9Ik01MDYuMzQxLDEwOS43NDRjLTQuNzk0LTUuODg0LTExLjg5OC05LjI1OC0xOS40ODktOS4yNThIOTUuMjc4TDg3LjM3LDYyLjA5N2MtMS42NTEtOC4wMDgtNy4xMTMtMTQuNzMyLTE0LjYxNC0xNy45ODkgICAgbC01NS4xNzctMjMuOTVjLTYuMzctMi43NjctMTMuNzczLDAuMTU2LTE2LjUzNiw2LjUyNGMtMi43NjYsNi4zNywwLjE1NywxMy43NzQsNi41MjQsMTYuNTM3TDYyLjc0NSw2Ny4xN2w2MC44MjYsMjk1LjI2MSAgICBjMi4zOTYsMTEuNjI4LDEyLjc1MiwyMC4wNjgsMjQuNjI1LDIwLjA2OGgzMDEuMTY2YzYuOTQzLDAsMTIuNTcxLTUuNjI4LDEyLjU3MS0xMi41NzFjMC02Ljk0My01LjYyOC0xMi41NzEtMTIuNTcxLTEyLjU3MSAgICBIMTQ4LjE5N2wtNy4zOTktMzUuOTE2SDQ1MS42OWMxMS44NzIsMCwyMi4yMjktOC40NCwyNC42MjQtMjAuMDY4bDM1LjE2My0xNzAuNjc1ICAgIEM1MTMuMDA4LDEyMy4yNjYsNTExLjEzNiwxMTUuNjI3LDUwNi4zNDEsMTA5Ljc0NHogTTQ1MS42OSwyOTYuMzAxSDEzNS42MTlsLTM1LjE2MS0xNzAuNjc0bDM4Ni4zOTMsMC4wMDFMNDUxLjY5LDI5Ni4zMDF6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIHN0eWxlPSJmaWxsOiNGRkZGRkYiIGRhdGEtb2xkX2NvbG9yPSIjMDAwMDAwIj48L3BhdGg+Cgk8L2c+CjwvZz48L2c+IDwvc3ZnPg==" />
                 </v-badge>
-            </btn>
+            </v-btn>
 
         </v-app-bar>
+    
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+         <v-list-item>
+        <v-list-item-content>
+          <img style="width:50px;" class="mt-2" src="../assets/logo-blue.png" alt="">
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+     <v-list-item
+          link
+        >
+          <v-avatar>
+            <img style="width:20px;" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjUxMnB4Ij48cGF0aCBkPSJtMTk3LjMzMjAzMSAxNzAuNjY3OTY5aC0xNjBjLTIwLjU4NTkzNyAwLTM3LjMzMjAzMS0xNi43NDYwOTQtMzcuMzMyMDMxLTM3LjMzNTkzOHYtOTZjMC0yMC41ODU5MzcgMTYuNzQ2MDk0LTM3LjMzMjAzMSAzNy4zMzIwMzEtMzcuMzMyMDMxaDE2MGMyMC41ODk4NDQgMCAzNy4zMzU5MzggMTYuNzQ2MDk0IDM3LjMzNTkzOCAzNy4zMzIwMzF2OTZjMCAyMC41ODk4NDQtMTYuNzQ2MDk0IDM3LjMzNTkzOC0zNy4zMzU5MzggMzcuMzM1OTM4em0tMTYwLTEzOC42Njc5NjljLTIuOTQxNDA2IDAtNS4zMzIwMzEgMi4zOTA2MjUtNS4zMzIwMzEgNS4zMzIwMzF2OTZjMCAyLjk0NTMxMyAyLjM5MDYyNSA1LjMzNTkzOCA1LjMzMjAzMSA1LjMzNTkzOGgxNjBjMi45NDUzMTMgMCA1LjMzNTkzOC0yLjM5MDYyNSA1LjMzNTkzOC01LjMzNTkzOHYtOTZjMC0yLjk0MTQwNi0yLjM5MDYyNS01LjMzMjAzMS01LjMzNTkzOC01LjMzMjAzMXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PHBhdGggZD0ibTE5Ny4zMzIwMzEgNTEyaC0xNjBjLTIwLjU4NTkzNyAwLTM3LjMzMjAzMS0xNi43NDYwOTQtMzcuMzMyMDMxLTM3LjMzMjAzMXYtMjI0YzAtMjAuNTg5ODQ0IDE2Ljc0NjA5NC0zNy4zMzU5MzggMzcuMzMyMDMxLTM3LjMzNTkzOGgxNjBjMjAuNTg5ODQ0IDAgMzcuMzM1OTM4IDE2Ljc0NjA5NCAzNy4zMzU5MzggMzcuMzM1OTM4djIyNGMwIDIwLjU4NTkzNy0xNi43NDYwOTQgMzcuMzMyMDMxLTM3LjMzNTkzOCAzNy4zMzIwMzF6bS0xNjAtMjY2LjY2Nzk2OWMtMi45NDE0MDYgMC01LjMzMjAzMSAyLjM5MDYyNS01LjMzMjAzMSA1LjMzNTkzOHYyMjRjMCAyLjk0MTQwNiAyLjM5MDYyNSA1LjMzMjAzMSA1LjMzMjAzMSA1LjMzMjAzMWgxNjBjMi45NDUzMTMgMCA1LjMzNTkzOC0yLjM5MDYyNSA1LjMzNTkzOC01LjMzMjAzMXYtMjI0YzAtMi45NDUzMTMtMi4zOTA2MjUtNS4zMzU5MzgtNS4zMzU5MzgtNS4zMzU5Mzh6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjxwYXRoIGQ9Im00NzQuNjY3OTY5IDUxMmgtMTYwYy0yMC41ODk4NDQgMC0zNy4zMzU5MzgtMTYuNzQ2MDk0LTM3LjMzNTkzOC0zNy4zMzIwMzF2LTk2YzAtMjAuNTg5ODQ0IDE2Ljc0NjA5NC0zNy4zMzU5MzggMzcuMzM1OTM4LTM3LjMzNTkzOGgxNjBjMjAuNTg1OTM3IDAgMzcuMzMyMDMxIDE2Ljc0NjA5NCAzNy4zMzIwMzEgMzcuMzM1OTM4djk2YzAgMjAuNTg1OTM3LTE2Ljc0NjA5NCAzNy4zMzIwMzEtMzcuMzMyMDMxIDM3LjMzMjAzMXptLTE2MC0xMzguNjY3OTY5Yy0yLjk0NTMxMyAwLTUuMzM1OTM4IDIuMzkwNjI1LTUuMzM1OTM4IDUuMzM1OTM4djk2YzAgMi45NDE0MDYgMi4zOTA2MjUgNS4zMzIwMzEgNS4zMzU5MzggNS4zMzIwMzFoMTYwYzIuOTQxNDA2IDAgNS4zMzIwMzEtMi4zOTA2MjUgNS4zMzIwMzEtNS4zMzIwMzF2LTk2YzAtMi45NDUzMTMtMi4zOTA2MjUtNS4zMzU5MzgtNS4zMzIwMzEtNS4zMzU5Mzh6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjxwYXRoIGQ9Im00NzQuNjY3OTY5IDI5OC42Njc5NjloLTE2MGMtMjAuNTg5ODQ0IDAtMzcuMzM1OTM4LTE2Ljc0NjA5NC0zNy4zMzU5MzgtMzcuMzM1OTM4di0yMjRjMC0yMC41ODU5MzcgMTYuNzQ2MDk0LTM3LjMzMjAzMSAzNy4zMzU5MzgtMzcuMzMyMDMxaDE2MGMyMC41ODU5MzcgMCAzNy4zMzIwMzEgMTYuNzQ2MDk0IDM3LjMzMjAzMSAzNy4zMzIwMzF2MjI0YzAgMjAuNTg5ODQ0LTE2Ljc0NjA5NCAzNy4zMzU5MzgtMzcuMzMyMDMxIDM3LjMzNTkzOHptLTE2MC0yNjYuNjY3OTY5Yy0yLjk0NTMxMyAwLTUuMzM1OTM4IDIuMzkwNjI1LTUuMzM1OTM4IDUuMzMyMDMxdjIyNGMwIDIuOTQ1MzEzIDIuMzkwNjI1IDUuMzM1OTM4IDUuMzM1OTM4IDUuMzM1OTM4aDE2MGMyLjk0MTQwNiAwIDUuMzMyMDMxLTIuMzkwNjI1IDUuMzMyMDMxLTUuMzM1OTM4di0yMjRjMC0yLjk0MTQwNi0yLjM5MDYyNS01LjMzMjAzMS01LjMzMjAzMS01LjMzMjAzMXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PC9zdmc+Cg==" />
+          </v-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title style="font-size:17px">
+              <nuxt-link style="text-decoration: none;" class="text-black" :to="{path: '/produtos'}">Inicio</nuxt-link>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item
+          link
+        >
+          <v-avatar>
+            <img style="width:25px;" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTEuOTk5IDUxMS45OTkiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMS45OTkgNTExLjk5OTsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTIxNC42ODUsNDAyLjgyOGMtMjQuODI5LDAtNDUuMDI5LDIwLjItNDUuMDI5LDQ1LjAyOWMwLDI0LjgyOSwyMC4yLDQ1LjAyOSw0NS4wMjksNDUuMDI5czQ1LjAyOS0yMC4yLDQ1LjAyOS00NS4wMjkgICAgQzI1OS43MTMsNDIzLjAyOCwyMzkuNTEzLDQwMi44MjgsMjE0LjY4NSw0MDIuODI4eiBNMjE0LjY4NSw0NjcuNzQyYy0xMC45NjYsMC0xOS44ODctOC45MjItMTkuODg3LTE5Ljg4NyAgICBjMC0xMC45NjYsOC45MjItMTkuODg3LDE5Ljg4Ny0xOS44ODdzMTkuODg3LDguOTIyLDE5Ljg4NywxOS44ODdDMjM0LjU3Miw0NTguODIyLDIyNS42NSw0NjcuNzQyLDIxNC42ODUsNDY3Ljc0MnoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik0zNzIuNjMsNDAyLjgyOGMtMjQuODI5LDAtNDUuMDI5LDIwLjItNDUuMDI5LDQ1LjAyOWMwLDI0LjgyOSwyMC4yLDQ1LjAyOSw0NS4wMjksNDUuMDI5czQ1LjAyOS0yMC4yLDQ1LjAyOS00NS4wMjkgICAgQzQxNy42NTgsNDIzLjAyOCwzOTcuNDU4LDQwMi44MjgsMzcyLjYzLDQwMi44Mjh6IE0zNzIuNjMsNDY3Ljc0MmMtMTAuOTY2LDAtMTkuODg3LTguOTIyLTE5Ljg4Ny0xOS44ODcgICAgYzAtMTAuOTY2LDguOTIyLTE5Ljg4NywxOS44ODctMTkuODg3YzEwLjk2NiwwLDE5Ljg4Nyw4LjkyMiwxOS44ODcsMTkuODg3QzM5Mi41MTcsNDU4LjgyMiwzODMuNTk1LDQ2Ny43NDIsMzcyLjYzLDQ2Ny43NDJ6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMzgzLjcxNiwxNjUuNzU1SDIwMy41NjdjLTYuOTQzLDAtMTIuNTcxLDUuNjI4LTEyLjU3MSwxMi41NzFjMCw2Ljk0Myw1LjYyOSwxMi41NzEsMTIuNTcxLDEyLjU3MWgxODAuMTQ5ICAgIGM2Ljk0MywwLDEyLjU3MS01LjYyOCwxMi41NzEtMTIuNTcxQzM5Ni4yODcsMTcxLjM4MiwzOTAuNjU5LDE2NS43NTUsMzgzLjcxNiwxNjUuNzU1eiIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTM3My45MTEsMjMxLjAzNUgyMTMuMzczYy02Ljk0MywwLTEyLjU3MSw1LjYyOC0xMi41NzEsMTIuNTcxczUuNjI4LDEyLjU3MSwxMi41NzEsMTIuNTcxaDE2MC41MzcgICAgYzYuOTQzLDAsMTIuNTcxLTUuNjI4LDEyLjU3MS0xMi41NzFDMzg2LjQ4MSwyMzYuNjY0LDM4MC44NTMsMjMxLjAzNSwzNzMuOTExLDIzMS4wMzV6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNNTA2LjM0MSwxMDkuNzQ0Yy00Ljc5NC01Ljg4NC0xMS44OTgtOS4yNTgtMTkuNDg5LTkuMjU4SDk1LjI3OEw4Ny4zNyw2Mi4wOTdjLTEuNjUxLTguMDA4LTcuMTEzLTE0LjczMi0xNC42MTQtMTcuOTg5ICAgIGwtNTUuMTc3LTIzLjk1Yy02LjM3LTIuNzY3LTEzLjc3MywwLjE1Ni0xNi41MzYsNi41MjRjLTIuNzY2LDYuMzcsMC4xNTcsMTMuNzc0LDYuNTI0LDE2LjUzN0w2Mi43NDUsNjcuMTdsNjAuODI2LDI5NS4yNjEgICAgYzIuMzk2LDExLjYyOCwxMi43NTIsMjAuMDY4LDI0LjYyNSwyMC4wNjhoMzAxLjE2NmM2Ljk0MywwLDEyLjU3MS01LjYyOCwxMi41NzEtMTIuNTcxYzAtNi45NDMtNS42MjgtMTIuNTcxLTEyLjU3MS0xMi41NzEgICAgSDE0OC4xOTdsLTcuMzk5LTM1LjkxNkg0NTEuNjljMTEuODcyLDAsMjIuMjI5LTguNDQsMjQuNjI0LTIwLjA2OGwzNS4xNjMtMTcwLjY3NSAgICBDNTEzLjAwOCwxMjMuMjY2LDUxMS4xMzYsMTE1LjYyNyw1MDYuMzQxLDEwOS43NDR6IE00NTEuNjksMjk2LjMwMUgxMzUuNjE5bC0zNS4xNjEtMTcwLjY3NGwzODYuMzkzLDAuMDAxTDQ1MS42OSwyOTYuMzAxeiIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
+          </v-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title style="font-size:17px">
+              <nuxt-link style="text-decoration: none;" class="text-black" :to="{path: '/produtos/carrinho'}">Carrinho</nuxt-link>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item
+          link
+        >
+          <v-avatar>
+            <img style="width:20px;" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik00MzcuMDIsMzMwLjk4Yy0yNy44ODMtMjcuODgyLTYxLjA3MS00OC41MjMtOTcuMjgxLTYxLjAxOEMzNzguNTIxLDI0My4yNTEsNDA0LDE5OC41NDgsNDA0LDE0OCAgICBDNDA0LDY2LjM5MywzMzcuNjA3LDAsMjU2LDBTMTA4LDY2LjM5MywxMDgsMTQ4YzAsNTAuNTQ4LDI1LjQ3OSw5NS4yNTEsNjQuMjYyLDEyMS45NjIgICAgYy0zNi4yMSwxMi40OTUtNjkuMzk4LDMzLjEzNi05Ny4yODEsNjEuMDE4QzI2LjYyOSwzNzkuMzMzLDAsNDQzLjYyLDAsNTEyaDQwYzAtMTE5LjEwMyw5Ni44OTctMjE2LDIxNi0yMTZzMjE2LDk2Ljg5NywyMTYsMjE2ICAgIGg0MEM1MTIsNDQzLjYyLDQ4NS4zNzEsMzc5LjMzMyw0MzcuMDIsMzMwLjk4eiBNMjU2LDI1NmMtNTkuNTUxLDAtMTA4LTQ4LjQ0OC0xMDgtMTA4UzE5Ni40NDksNDAsMjU2LDQwICAgIGM1OS41NTEsMCwxMDgsNDguNDQ4LDEwOCwxMDhTMzE1LjU1MSwyNTYsMjU2LDI1NnoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
+          </v-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title style="font-size:17px">
+              <nuxt-link style="text-decoration: none;" class="text-black" :to="{path: '/login' }">Login</nuxt-link>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+    </v-navigation-drawer>
     </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 export default {
     data() {
         return {
-            qtd: this.$store.state.quantidade,
+            drawer: null,
         }
     },
-    
+
+    computed: {
+        qtd: {
+            get() {
+                return this.$store.state.produto.quantidade;
+            }
+        },
+    },
 }
 </script>
 
 <style scoped>
 .badge{
     margin-right: 20px;
+}
+.text-black{
+  color: black;
 }
 </style>
